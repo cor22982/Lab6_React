@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="./gratis-png-bandera-de-guatemala-computadora-iconos-icono-diseno-educacion-en-el-extranjero-removebg-.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <title>Guatepedia</title>
+    <link rel = "stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+      body {
+          margin: 0;
+      }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel"> 
+      const Header = () => {
+        const imageStyles = {
+          width: '100%', // Cambia el ancho según lo necesites
+          height: '200px', // Altura fija de 200 píxeles
+          objectFit: 'cover' // Para mantener la proporción y cubrir el contenedor
+        }
+        const titleStyles = {
+          display: 'flex',
+          backgroundColor: 'transparent',
+          fontSize: '80px',
+          justifyContent: 'center',
+          fontFamily: 'monospace', /* Utiliza una fuente monoespaciada */
+          color: 'white', /* Utiliza un color verde típico de muchas terminales */
+          marginBottom: '0px',
+          transform: 'translateY(-105%)'
+        }
+        return (
+          <div>
+            <img className="imagen" src="https://content.r9cdn.net/rimg/dimg/6f/d5/a11de2dc-city-43889-162df482d9d.jpg?width=1200&height=630&xhint=1422&yhint=2033&crop=true" alt="Descripción de la imagen" style={imageStyles}/>
+            <h1 class="Titulo_Principal"
+            style = {titleStyles}>Guatepedia</h1>
+          </div>
+          
+        )
+      }
+
+
+      const App = () => {
+        const styles = {
+          backgroundColor: 'rgb(0, 0, 0)',
+          height: '100vh',
+          width: '100vw'
+        }
+        const styleconedor = {
+          margintop: '0px',
+          display: 'flex',
+          justifyContent: 'space-around'
+        }
+        const botonesinicio = {
+          borderRadius: '10px',
+          backgroundColor: 'white',
+          fontSize: '25px',
+          width: '600px',
+          height: '50px'
+        }
+        return (
+          <div style={styles}>
+            <Header />
+            <div class = "Contenedor_Botones" style = {styleconedor}>
+              <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-house"></i>Principal</button>
+              <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-plus"></i>Postear</button>
+            </div>
+          </div>
+        )
+      }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'))
+    root.render(<App />)
+    </script>
+</body>
+</html>

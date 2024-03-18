@@ -11,6 +11,7 @@
     <style>
       body {
           margin: 0;
+          background-color: #000000
       }
     </style>
 </head>
@@ -43,6 +44,97 @@
         )
       }
 
+      const Footer = () => {
+        const styles = {
+          display: 'flex',
+          color: 'white',
+          fontSize: '20px',
+          justifyContent: 'center'
+        }
+        return (
+          <footer style={styles}>
+            Copyright 2024 UVG
+          </footer>
+        )
+      }
+
+
+      const Post = ({ title, body, img }) => {
+        const stylesPost = {
+          backgroundColor: '#101214',
+          height: '900px',
+          marginLeft: '10px',
+          borderRadius: '7px',
+          marginTop: '12px',
+          display: 'grid',
+          width: '900px',
+          gridTemplateRows: '1fr 2fr 6fr 1fr'
+        }
+        const styleTitulo = {
+          gridRow: '1',
+          fontSize: '40px',
+          backgroundColor: 'transparent',
+          color: 'white',
+          marginLeft: '20px',
+          marginTop: '20px'
+        }
+
+        const styleBrief = {
+          gridRow: '2',
+          fontSize: '20px',
+          backgroundColor: 'transparent',
+          color: 'lightgray',
+          marginLeft: '20px',
+          marginTop: '20px',
+          marginRight: '10px'
+        }
+
+        const styleImage = {
+          gridRow: '3',
+          backgroundColor: 'transparent',
+          width: '850px',
+          height: '550px',
+          marginLeft: '20px',
+          objectFit: 'cover'
+        }
+        const styleareaBoton = {
+          marginTop: '10px',
+          gridRow: '4',
+          backgroundColor: 'transparent'
+        }
+        const stylebotones = {
+          width: '100px',
+          height: '50px',
+          backgroundColor: '#232629',
+          borderRadius: '20px',
+          marginLeft: '10px',
+          borderColor: 'transparent',
+        }
+        const iconostyle = {
+          color: '#888a8d',
+          fontSize: '30px'
+        }
+        return (
+          <div class = 'contenedor' style={stylesPost}>
+            <div class = 'titulo' style = {styleTitulo}>{title}</div>
+            <div class = 'brief' style = {styleBrief}>{body}</div>
+            <img src={img} alt="Descripción de la imagen" style={styleImage}/>
+            <div class = 'botonarea' style = {styleareaBoton}>
+              <button style = {stylebotones}><i class="fa-solid fa-trash" style = {iconostyle}></i></button>
+              <button style = {stylebotones}><i class="fa-solid fa-pen-to-square" style = {iconostyle}></i></button>
+            </div>
+          </div>
+          
+        )
+      }
+
+      const Posts = () => {
+        return (
+          <div class = 'CotenedorPosts'>
+            <Post title='Jexs' body='Jeremy Roberto mejor conocido como Jexs es un YouTuber guatemalteco que sube videos de comedia, bromas, retos, gameplays, entre otros.' img = 'https://i.ytimg.com/vi/bnSBHYngEQY/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLBqQRXVPn2fk9ejrL6uB9U09j5pMw'/>   
+          </div>
+        )
+      }
 
       const App = () => {
         const styles = {
@@ -63,13 +155,16 @@
           height: '50px'
         }
         return (
-          <div style={styles}>
+          <main style={styles}>
             <Header />
             <div class = "Contenedor_Botones" style = {styleconedor}>
               <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-house"></i>Principal</button>
               <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-plus"></i>Postear</button>
+              
             </div>
-          </div>
+            <Posts />
+            <Footer />
+          </main>
         )
       }
 

@@ -49,7 +49,8 @@
           display: 'flex',
           color: 'white',
           fontSize: '20px',
-          justifyContent: 'center'
+          justifyContent: 'center',
+          marginTop: '20px'
         }
         return (
           <footer style={styles}>
@@ -65,7 +66,7 @@
           height: '900px',
           marginLeft: '10px',
           borderRadius: '7px',
-          marginTop: '12px',
+          marginTop: '20px',
           display: 'grid',
           width: '900px',
           gridTemplateRows: '1fr 2fr 6fr 1fr'
@@ -114,6 +115,7 @@
           color: '#888a8d',
           fontSize: '30px'
         }
+        
         return (
           <div class = 'contenedor' style={stylesPost}>
             <div class = 'titulo' style = {styleTitulo}>{title}</div>
@@ -129,9 +131,21 @@
       }
 
       const Posts = () => {
+        const [ posts, setPosts ] = React.useState([])
+        const getPosts = async () => {
+          const apiResponse = await fetch('https://api.tiburoncin.lat/22982/posts')
+          const jsonPosts = await apiResponse.json()
+          const formattedPosts = jsonPosts.map(
+            ({ Pearson, Few_Description,images  }) => ({ title: Pearson, body: Few_Description,img:images })
+          ) 
+          setPosts(formattedPosts)
+        }
+
+        React.useEffect(() => {
+          getPosts()}, [])
         return (
           <div class = 'CotenedorPosts'>
-            <Post title='Jexs' body='Jeremy Roberto mejor conocido como Jexs es un YouTuber guatemalteco que sube videos de comedia, bromas, retos, gameplays, entre otros.' img = 'https://i.ytimg.com/vi/bnSBHYngEQY/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLBqQRXVPn2fk9ejrL6uB9U09j5pMw'/>   
+            {posts.map(({ title, body, img }) => <Post title={title} body={body}  img = {img}/>)}   
           </div>
         )
       }

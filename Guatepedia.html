@@ -13,11 +13,34 @@
           margin: 0;
           background-color: #000000
       }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .spinner-border {
+        animation: spin 2s linear infinite;
+      }
     </style>
 </head>
 <body>
     <div id="root"></div>
     <script type="text/babel"> 
+
+    // Este es el spiner de carga
+    const LoadingSpinner = () => {
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div className="spinner-border" role="status" style={{ color: 'white', fontSize: '60px', animation: 'spin 2s linear infinite' }}>
+            <i class="fa-solid fa-spinner"></i>
+          </div>
+          <span className="visually-hidden" style = {{color: 'white', fontSize: '60px'}}> Cargando</span>
+        </div>
+      )
+    }
+
+
+
       const Header = () => {
         const imageStyles = {
           width: '100%', // Cambia el ancho según lo necesites
@@ -143,6 +166,13 @@
 
         React.useEffect(() => {
           getPosts()}, [])
+        
+        if (posts.length === 0){
+          return (
+            <LoadingSpinner />
+          )
+        }
+
         return (
           <div class = 'CotenedorPosts'>
             {posts.map(({ title, body, img }) => <Post title={title} body={body}  img = {img}/>)}   
@@ -176,7 +206,9 @@
               <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-plus"></i>Postear</button>
               
             </div>
-            <Posts />
+            <React.Suspense fallback={<LoadingSpinner />}>
+              <Posts />
+            </React.Suspense>
             <Footer />
           </main>
         )

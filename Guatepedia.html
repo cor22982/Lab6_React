@@ -25,7 +25,8 @@
 </head>
 <body>
     <div id="root"></div>
-    <script type="text/babel"> 
+    <script type="text/babel">
+    
 
     // Este es el spiner de carga
     const LoadingSpinner = () => {
@@ -35,6 +36,15 @@
             <i class="fa-solid fa-spinner"></i>
           </div>
           <span className="visually-hidden" style = {{color: 'white', fontSize: '60px'}}> Cargando</span>
+        </div>
+      )
+    }
+
+    const ErrorLabel = () => {
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <i class="fa-solid fa-xmark" style = {{color: 'white', fontSize: '60px'}}></i>
+          <span className="visually-hidden" style = {{color: 'white', fontSize: '60px'}}> No hay ningun post disponible</span>
         </div>
       )
     }
@@ -145,13 +155,14 @@
             <div class = 'brief' style = {styleBrief}>{body}</div>
             <img src={img} alt="Descripción de la imagen" style={styleImage}/>
             <div class = 'botonarea' style = {styleareaBoton}>
-              <button style = {stylebotones}><i class="fa-solid fa-trash" style = {iconostyle}></i></button>
+              <button style = {stylebotones} ><i class="fa-solid fa-trash" style = {iconostyle}></i></button>
               <button style = {stylebotones}><i class="fa-solid fa-pen-to-square" style = {iconostyle}></i></button>
             </div>
           </div>
           
         )
       }
+
 
       const Posts = () => {
         const [ posts, setPosts ] = React.useState([])
@@ -167,11 +178,9 @@
         React.useEffect(() => {
           getPosts()}, [])
         
-        if (posts.length === 0){
-          return (
-            <LoadingSpinner />
-          )
-        }
+          if (posts.length === 0) {
+            return <LoadingSpinner />
+          }
 
         return (
           <div class = 'CotenedorPosts'>
@@ -181,6 +190,7 @@
       }
 
       const App = () => {
+        const [currentPage, setCurrentPage] = React.useState('home');
         const styles = {
           backgroundColor: 'rgb(0, 0, 0)',
           height: '100vh',
@@ -198,18 +208,39 @@
           width: '600px',
           height: '50px'
         }
+        const handleButtonClick = (page) => {
+          setCurrentPage(page)
+        }
+
+        let content;
+        switch (currentPage) {
+          case 'home':
+            content = (
+              <Posts />
+            )
+          break;
+          case 'postear':
+            content = (
+                <div>
+                    
+                </div>
+              )
+            break;
+          default:
+
+            break;
+        }
         return (
           <main style={styles}>
             <Header />
             <div class = "Contenedor_Botones" style = {styleconedor}>
-              <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-house"></i>Principal</button>
-              <button class="botonesinicio" style = {botonesinicio}><i class="fa-solid fa-plus"></i>Postear</button>
-              
+              <button class="botonesinicio" style = {botonesinicio} onClick={() => handleButtonClick('home')} ><i class="fa-solid fa-house"></i>Principal</button>
+              <button class="botonesinicio" style = {botonesinicio} onClick={() => handleButtonClick('postear')}><i class="fa-solid fa-plus"></i>Postear</button>
             </div>
             <React.Suspense fallback={<LoadingSpinner />}>
-              <Posts />
+              {content}
             </React.Suspense>
-            <Footer />
+            <Footer />  
           </main>
         )
       }

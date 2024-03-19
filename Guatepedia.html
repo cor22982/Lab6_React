@@ -49,7 +49,65 @@
       )
     }
 
+    const Labelpost = () => {
 
+      const styleContenedorPost = {
+        backgroundColor: '#101214',
+        height: '1050px',
+        borderRadius: '7px',
+        marginTop: '20px',
+        display: 'flex',
+        flexDirection: 'column', // Cambiar la dirección a columnas
+        width: '1000px',
+        
+          
+      }
+
+      const textArea = {
+        height: '55px',
+        width: '950px',
+        marginTop: '20px',
+        backgroundColor: 'transparent',
+        borderColor: '#343536',
+        borderWidth: '3.5px',
+        color: 'white',
+        fontSize: '30px',
+        borderRadius: '11px',
+        marginLeft: '20px'
+      }
+
+      const textAreaHistory = {
+        ...textArea,
+        height: '100px'
+      }
+
+      const stylebutton = {
+        marginTop: '25px',
+        width: '950px',
+        marginLeft: '20px',
+        height: '55px',
+        borderRadius: '12px',
+        fontSize: '30px',
+        backgroundColor: '#343536',
+        color: 'white'
+      }
+      
+      return (
+        <div style = {styleContenedorPost}>
+          
+          <textarea style = {textArea} placeholder="Nombre"></textarea>
+          <textarea style = {textArea} placeholder="Descripcion"></textarea>
+          <textarea style = {textAreaHistory} placeholder="Historia"></textarea>
+          <textarea style = {textAreaHistory} placeholder="Eventos Cruciales"></textarea>
+          <textarea style = {textAreaHistory} placeholder="Curiosidades"></textarea>
+          <textarea style = {textArea} placeholder="Titulo Alternativo"></textarea>
+          <textarea style = {textAreaHistory} placeholder="Texto Alternativo"></textarea>
+          <textarea style = {textArea} placeholder="Referencia"></textarea>
+          <textarea style = {textArea} placeholder="Imagen (base64)"></textarea>
+          <button style = {stylebutton}>Postear</button>
+        </div>
+      )
+    }
 
       const Header = () => {
         const imageStyles = {
@@ -289,9 +347,12 @@
           break;
           case 'postear':
             content = (
-                <div>
-                    
+                <div style = {{
+                  display: 'flex', justifyContent: 'center', alignItems: 'center'
+                }}>
+                  <Labelpost/>
                 </div>
+                
               )
             break;
           case 'articulo':

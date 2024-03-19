@@ -78,6 +78,23 @@
       }
 
       const CreateArticle = ({ postId }) => {
+        const stylesubtitulos = {
+          color: 'white',
+          fontSize: '50px',
+          marginLeft: '40px'
+        }
+        const styleimagen = {
+          width: '100%',
+          objectFit: 'cover',
+          height: '600px'
+
+        }
+        const styletextoplano = {
+          color: 'white',
+          fontSize: '25px',
+          marginLeft: '40px',
+          marginRight: '40px'
+        }
         const [postData, setPostData] = React.useState(null);
 
         React.useEffect(() => {
@@ -101,8 +118,19 @@
 
         return (
           <div>
-            <h1 style = {{ color: 'white'}}>{postData[0].Pearson}</h1>
-            {/* Aquí puedes mostrar el resto de la información del artículo */}
+            <h1 style = {{ color: 'white', fontSize: '80px', display: 'flex', justifyContent: 'center'}}>{postData[0].Pearson}</h1>
+            <img src= {postData[0].images} style = {styleimagen}></img>
+            <h2 style = {stylesubtitulos}>Historia</h2>
+            <p style = {styletextoplano}>{postData[0].History}</p>
+            <h2 style = {stylesubtitulos}>Eventos Cruciales</h2>
+            <p style = {styletextoplano}>{postData[0].Crucial_Events}</p>
+            <h2 style = {stylesubtitulos}>Curiosidades</h2>
+            <p style = {styletextoplano}>{postData[0].Curiosities}</p>
+            <h2 style = {stylesubtitulos}>{postData[0].AlternativeText}</h2>
+            <p style = {styletextoplano}>{postData[0].AlternativeDescription}</p>
+            <a href={postData[0].Text_References} style= {{ marginLeft: '40px', 
+                  fontSize: '30px', color: 'lightblue'
+              }}>Referencias</a>
           </div>
         );
       };

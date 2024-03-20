@@ -300,11 +300,13 @@
       }
 
 
-      const Post = ({ id, title, body, img , handleSelectPost}) => {
+      const Post = ({ id, title, body, img , handleSelectPost, deletePost}) => {
+        
+
         const stylesPost = {
           backgroundColor: '#101214',
           height: '900px',
-          marginLeft: '10px',
+          marginLeft: '20px',
           borderRadius: '7px',
           marginTop: '20px',
           display: 'grid',
@@ -355,18 +357,19 @@
           color: '#888a8d',
           fontSize: '30px'
         }
-        
+
+        const deletePostHandler = () => {
+          deletePost(id);
+        }
+
         return (
-          <div class = 'contenedor' style={stylesPost}
-          onMouseEnter={(e) => e.target.style.backgroundColor = '#1a1c1d'}
-          onClick={() => handleSelectPost('articulo',id)}
-          >
+          <div class = 'contenedor' style={stylesPost}>
             <div class = 'titulo' style = {styleTitulo}>{title}</div>
             <div class = 'brief' style = {styleBrief}>{body}</div>
-            <img src={img} alt="Descripción de la imagen" style={styleImage}/>
+            <img src={img} alt="Descripción de la imagen" style={styleImage} onClick={() => handleSelectPost('articulo',id)}/>
             <div class = 'botonarea' style = {styleareaBoton}>
-              <button style = {stylebotones} ><i class="fa-solid fa-trash" style = {iconostyle}></i></button>
-              <button style = {stylebotones}><i class="fa-solid fa-pen-to-square" style = {iconostyle}></i></button>
+              <button style = {stylebotones} onClick={deletePostHandler}><i class="fa-solid fa-trash" style = {iconostyle} ></i></button>
+              
             </div>
           </div>
           
@@ -387,14 +390,29 @@
 
         React.useEffect(() => {
           getPosts()}, [])
-        
+          
+        const deletePost = async (postId) => {
+          const response = await fetch(`https://api.tiburoncin.lat/22982/posts/${postId}`, {
+            method: 'DELETE'
+          });
+
+          if (response.ok) {
+            alert('Post eliminado correctamente');
+            // Actualizar la lista de posts después de eliminar el post
+            const updatedPosts = posts.filter(post => post.id !== postId);
+            setPosts(updatedPosts);
+          }
+        }
+
+
+
           if (posts.length === 0) {
             return <LoadingSpinner />
           }
 
         return (
           <div class = 'CotenedorPosts'>
-            {posts.map(({ id, title, body, img }) => <Post id={id} title={title} body={body}  img = {img} handleSelectPost = {handleSelectPost}/>)}   
+            {posts.map(({ id, title, body, img }) => <Post id={id} title={title} body={body}  img = {img} handleSelectPost = {handleSelectPost} deletePost={deletePost}/>)}   
           </div>
         )
       }

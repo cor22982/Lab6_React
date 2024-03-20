@@ -51,6 +51,38 @@
 
     const Labelpost = () => {
 
+    const [postData, setPostData] = React.useState({
+      Pearson: '',
+      Fewdescription: '',
+      History: '',
+      Crucialevents: '',
+      Curiosities: '',
+      AlternativeText: '',
+      AlternativeDescription: '',
+      Textreferences: '',
+      images: ''
+    });
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setPostData((prevData) => ({
+        ...prevData,
+        [name]: value
+      }));
+    };
+
+    const subirPost = async () => {
+      console.log(postData)
+      const response = await fetch('https://api.tiburoncin.lat/22982/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(postData)
+      });
+      
+    }
+
       const styleContenedorPost = {
         backgroundColor: '#101214',
         height: '1050px',
@@ -58,9 +90,7 @@
         marginTop: '20px',
         display: 'flex',
         flexDirection: 'column', // Cambiar la dirección a columnas
-        width: '1000px',
-        
-          
+        width: '1000px',    
       }
 
       const textArea = {
@@ -91,20 +121,80 @@
         backgroundColor: '#343536',
         color: 'white'
       }
-      
+       
       return (
-        <div style = {styleContenedorPost}>
+        <div style={styleContenedorPost}>
+          <textarea
+            style={textArea}
+            name="Pearson"
+            value={postData.Pearson}
+            onChange={handleChange}
+            placeholder="Nombre"
+          ></textarea>
           
-          <textarea style = {textArea} placeholder="Nombre"></textarea>
-          <textarea style = {textArea} placeholder="Descripcion"></textarea>
-          <textarea style = {textAreaHistory} placeholder="Historia"></textarea>
-          <textarea style = {textAreaHistory} placeholder="Eventos Cruciales"></textarea>
-          <textarea style = {textAreaHistory} placeholder="Curiosidades"></textarea>
-          <textarea style = {textArea} placeholder="Titulo Alternativo"></textarea>
-          <textarea style = {textAreaHistory} placeholder="Texto Alternativo"></textarea>
-          <textarea style = {textArea} placeholder="Referencia"></textarea>
-          <textarea style = {textArea} placeholder="Imagen (base64)"></textarea>
-          <button style = {stylebutton}>Postear</button>
+          <textarea
+            style={textArea}
+            name="Fewdescription"
+            value={postData.Fewdescription}
+            onChange={handleChange}
+            placeholder="Descripcion"
+          ></textarea>
+          <textarea
+            style={textAreaHistory}
+            name="History"
+            value={postData.History}
+            onChange={handleChange}
+            placeholder="Historia"
+          ></textarea>
+          <textarea
+            style={textAreaHistory}
+            name="Crucialevents"
+            value={postData.Crucialevents}
+            onChange={handleChange}
+            placeholder="Eventos Cruciales"
+          ></textarea>
+          <textarea
+            style={textAreaHistory}
+            name="Curiosities"
+            value={postData.Curiosities}
+            onChange={handleChange}
+            placeholder="Curiosidades"
+          ></textarea>
+
+          <textarea
+            style={textArea}
+            name="AlternativeText"
+            value={postData.AlternativeText}
+            onChange={handleChange}
+            placeholder="Titulo Alternativo"
+          ></textarea>
+
+          <textarea
+            style={textAreaHistory}
+            name="AlternativeDescription"
+            value={postData.AlternativeDescription}
+            onChange={handleChange}
+            placeholder="Descripcion Alternativa"
+          ></textarea>
+
+          <textarea
+            style={textArea}
+            name="Textreferences"
+            value={postData.Textreferences}
+            onChange={handleChange}
+            placeholder="Referencias"
+          ></textarea>
+
+          <textarea
+            style={textArea}
+            name="images"
+            value={postData.images}
+            onChange={handleChange}
+            placeholder="Imagen (base64)"
+          ></textarea>
+          <button style={stylebutton} onClick={subirPost}>
+            Postear
+          </button>
         </div>
       )
     }

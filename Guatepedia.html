@@ -94,6 +94,8 @@
           images: ''
         });
         
+      }else {
+        alert('No se pudo insertar un post debido a un error del servidor.')
       }
       
     }
@@ -415,7 +417,7 @@
           });
 
           if (response.ok) {
-            alert('Post eliminado correctamente');
+            alert('Post eliminado correctamente')
             // Actualizar la lista de posts después de eliminar el post
             const updatedPosts = posts.filter(post => post.id !== postId);
             setPosts(updatedPosts);
